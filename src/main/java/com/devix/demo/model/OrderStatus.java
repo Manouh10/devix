@@ -6,6 +6,9 @@ import java.util.List;
 @Entity
 @Table(name = "order_status")
 public class OrderStatus extends BaseEntity {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String name;
@@ -15,6 +18,7 @@ public class OrderStatus extends BaseEntity {
 
     @OneToMany(mappedBy = "status")
     private List<Order> orders;
+ 
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

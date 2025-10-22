@@ -5,6 +5,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String username;
@@ -21,7 +24,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "changedBy")
     private List<OrderHistory> orderHistories;
-
+   
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }

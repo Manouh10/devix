@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "authorizations")
-public class Authorization extends BaseEntity {
+public class Authorization  extends BaseEntity {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -18,7 +22,8 @@ public class Authorization extends BaseEntity {
 
     @Column(name = "can_write", nullable = false)
     private boolean canWrite = false;
-
+    
+   
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
     public String getEntity() { return entity; }

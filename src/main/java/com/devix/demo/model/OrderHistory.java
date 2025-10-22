@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "order_history")
 public class OrderHistory extends BaseEntity {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
@@ -22,7 +25,8 @@ public class OrderHistory extends BaseEntity {
 
     @Column(name = "new_value", length = 255)
     private String newValue;
-
+    
+   
     public Order getOrder() { return order; }
     public void setOrder(Order order) { this.order = order; }
     public User getChangedBy() { return changedBy; }

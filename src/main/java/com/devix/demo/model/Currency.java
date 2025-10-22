@@ -6,6 +6,10 @@ import java.util.List;
 @Entity
 @Table(name = "currencies")
 public class Currency extends BaseEntity {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 3)
     private String code;
@@ -18,7 +22,7 @@ public class Currency extends BaseEntity {
 
     @OneToMany(mappedBy = "currencyTo")
     private List<Order> ordersTo;
-
+    
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
     public String getName() { return name; }
