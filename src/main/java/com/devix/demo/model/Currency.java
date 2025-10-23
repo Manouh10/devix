@@ -1,13 +1,18 @@
 package com.devix.demo.model; 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.devix.demo.dto.TimeEntity;
 
-@Entity
+@Entity 
+@Getter
+@Setter
 @Table(name = "currencies")
 @EntityListeners(AuditingEntityListener.class)
 public class Currency  {
@@ -29,11 +34,6 @@ public class Currency  {
     private List<Order> ordersTo;
     
     @Embedded
-    private TimeEntity timeTrackable = new TimeEntity(); 
-    
-    public String getCode() { return code; }
-    public void setCode(String code) { this.code = code; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    private TimeEntity timeEntity = new TimeEntity();  
 }
 

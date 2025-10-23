@@ -5,8 +5,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.devix.demo.dto.TimeEntity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
+@Entity 
+@Getter
+@Setter
 @Table(name = "order_history")
 @EntityListeners(AuditingEntityListener.class)
 public class OrderHistory  {
@@ -32,12 +36,6 @@ public class OrderHistory  {
     private String newValue;
     
     @Embedded
-    private TimeEntity timeEntity = new TimeEntity(); 
-    
-   
-    public Order getOrder() { return order; }
-    public void setOrder(Order order) { this.order = order; }
-    public User getChangedBy() { return changedBy; }
-    public void setChangedBy(User changedBy) { this.changedBy = changedBy; }
+    private TimeEntity timeEntity = new TimeEntity();  
 }
 

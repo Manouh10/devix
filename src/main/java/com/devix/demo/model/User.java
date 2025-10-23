@@ -1,12 +1,25 @@
-package com.devix.demo.model; 
-import jakarta.persistence.*;
-import java.util.List;
+package com.devix.demo.model;  
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.devix.demo.dto.TimeEntity;
-
+import java.util.List; 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener; 
+import com.devix.demo.dto.TimeEntity; 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter; 
 @Entity
+@Getter
+@Setter
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class User   {
@@ -28,13 +41,6 @@ public class User   {
     private List<OrderHistory> orderHistories; 
    
     @Embedded
-    private TimeEntity timeEntity = new TimeEntity(); 
-   
-	public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public Role getRole() { return role; }
-    public void setRole(Role role) { this.role = role; }
+    private TimeEntity timeEntity = new TimeEntity();  
 }
 

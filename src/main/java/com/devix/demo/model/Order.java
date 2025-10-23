@@ -1,18 +1,19 @@
 package com.devix.demo.model; 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.devix.demo.dto.TimeEntity;
-
+import com.devix.demo.dto.TimeEntity; 
  
-/**
- * 
- */
-@Entity
+@Entity  
+@Getter
+@Setter
 @Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
 public class Order   {
@@ -53,6 +54,10 @@ public class Order   {
 	@ManyToOne
 	@JoinColumn(name = "created_by", nullable = false)
 	private User createdBy;
+	
+	@ManyToOne
+	@JoinColumn(name = "used_by", nullable = false)
+	private Customer usedBy;
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderHistory> history;
@@ -66,78 +71,5 @@ public class Order   {
 		if (amount != null && rate != null) {
 			convertedAmount = amount.multiply(rate);
 		}
-	}
-
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
-
-	public Currency getCurrencyFrom() {
-		return currencyFrom;
-	}
-
-	public void setCurrencyFrom(Currency currencyFrom) {
-		this.currencyFrom = currencyFrom;
-	}
-
-	public Currency getCurrencyTo() {
-		return currencyTo;
-	}
-
-	public void setCurrencyTo(Currency currencyTo) {
-		this.currencyTo = currencyTo;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public BigDecimal getRate() {
-		return rate;
-	}
-
-	public void setRate(BigDecimal rate) {
-		this.rate = rate;
-	}
-
-	public BigDecimal getConvertedAmount() {
-		return convertedAmount;
-	}
-
-	public void setConvertedAmount(BigDecimal convertedAmount) {
-		this.convertedAmount = convertedAmount;
-	}
-
-	public OrderStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(OrderStatus status) {
-		this.status = status;
-	}
-
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public List<OrderHistory> getHistory() {
-		return history;
-	}
-
-	public void setHistory(List<OrderHistory> history) {
-		this.history = history;
-	}
-
+	}  
 }
