@@ -4,13 +4,18 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
  
 /**
  * 
  */
 @Entity
 @Table(name = "orders")
-public class Order extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Order   {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +56,9 @@ public class Order extends BaseEntity {
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderHistory> history;
+	
+	@Embedded
+    private TimeEntity timeEntity = new TimeEntity(); 
  
 	@PrePersist
 	@PreUpdate

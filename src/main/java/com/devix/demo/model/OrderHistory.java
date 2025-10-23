@@ -1,10 +1,15 @@
 package com.devix.demo.model; 
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_history")
-public class OrderHistory extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class OrderHistory  {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +30,9 @@ public class OrderHistory extends BaseEntity {
 
     @Column(name = "new_value", length = 255)
     private String newValue;
+    
+    @Embedded
+    private TimeEntity timeEntity = new TimeEntity(); 
     
    
     public Order getOrder() { return order; }

@@ -2,9 +2,14 @@ package com.devix.demo.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class User   {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,15 +22,15 @@ public class User extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
-
-    @OneToMany(mappedBy = "createdBy")
-    private List<Order> orders;
+    private Role role; 
 
     @OneToMany(mappedBy = "changedBy")
-    private List<OrderHistory> orderHistories;
+    private List<OrderHistory> orderHistories; 
    
-    public String getUsername() { return username; }
+    @Embedded
+    private TimeEntity timeEntity = new TimeEntity(); 
+   
+	public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }

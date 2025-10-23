@@ -1,10 +1,15 @@
 package com.devix.demo.model; 
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "authorizations")
-public class Authorization  extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Authorization   {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +28,8 @@ public class Authorization  extends BaseEntity {
     @Column(name = "can_write", nullable = false)
     private boolean canWrite = false;
     
+    @Embedded
+    private TimeEntity timeTrackable = new TimeEntity(); 
    
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }

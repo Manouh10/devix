@@ -3,9 +3,14 @@ package com.devix.demo.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
 @Entity
 @Table(name = "order_status")
-public class OrderStatus extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class OrderStatus   {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +23,9 @@ public class OrderStatus extends BaseEntity {
 
     @OneToMany(mappedBy = "status")
     private List<Order> orders;
+    
+    @Embedded
+    private TimeEntity timeEntity = new TimeEntity(); 
  
 
     public String getName() { return name; }

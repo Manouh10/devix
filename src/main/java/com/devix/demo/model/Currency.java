@@ -3,9 +3,14 @@ package com.devix.demo.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.devix.demo.dto.TimeEntity;
+
 @Entity
 @Table(name = "currencies")
-public class Currency extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Currency  {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,9 @@ public class Currency extends BaseEntity {
 
     @OneToMany(mappedBy = "currencyTo")
     private List<Order> ordersTo;
+    
+    @Embedded
+    private TimeEntity timeTrackable = new TimeEntity(); 
     
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
