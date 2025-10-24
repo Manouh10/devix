@@ -24,16 +24,15 @@ public class OrderHistory  {
 
     @ManyToOne
     @JoinColumn(name = "changed_by", nullable = false)
-    private User changedBy;
+    private User changedBy; 
+    
+    @ManyToOne 
+    @JoinColumn(name = "old_status" , nullable = false)
+    private OrderStatus oldStatus;
 
-    @Column(name = "field_name", nullable = false, length = 50)
-    private String fieldName;
-
-    @Column(name = "old_value", length = 255)
-    private String oldValue;
-
-    @Column(name = "new_value", length = 255)
-    private String newValue;
+    @ManyToOne 
+    @JoinColumn(name = "new_status",  nullable = false)
+    private OrderStatus newStatus; 
     
     @Embedded
     private TimeEntity timeEntity = new TimeEntity();  

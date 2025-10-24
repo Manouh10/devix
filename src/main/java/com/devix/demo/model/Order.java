@@ -22,13 +22,9 @@ public class Order   {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	public enum Type {
-		ACHAT, VENTE
-	}
-
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 10)
-	private Type type;
+	@ManyToOne
+    @JoinColumn(name = "type", nullable = false)
+    private OrderType type; 
 
 	@ManyToOne
 	@JoinColumn(name = "currency_from_id", nullable = false)
@@ -63,7 +59,10 @@ public class Order   {
 	private List<OrderHistory> history;
 	
 	@Embedded
-    private TimeEntity timeEntity = new TimeEntity(); 
+    private TimeEntity timeEntity = new TimeEntity();  
+	
+	@Column(nullable = false, unique = true, length = 50)
+    private String description;
  
 	@PrePersist
 	@PreUpdate

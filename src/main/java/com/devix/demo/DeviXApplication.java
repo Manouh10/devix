@@ -14,8 +14,9 @@ import com.devix.demo.utils.MockExchangeRate;
 public class DeviXApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DeviXApplication.class, args);
+		SpringApplication.run(DeviXApplication.class, args); 
 		/*MockExchangeRate mock= new MockExchangeRate();
+		 * 
 		Currency mga=new Currency();mga.setName("MGA");
 		Currency eur=new Currency();eur.setName("EUR"); 
 		  System.out.println("Hello, Spring Boot is running!");
